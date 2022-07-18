@@ -1,0 +1,2675 @@
+
+  
+<div align="center">
+
+<br>
+  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+
+    
+
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Ingrese fecha">
+      <form [formGroup]="firstFormGroup" (ngSubmit)="openPDF(firstFormGroup)">
+        <ng-template matStepLabel>Información General</ng-template>
+        
+       
+          <br>
+
+  <div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title "><p><mat-card-title class="titlecenter">Fecha elaboración del documento:
+                        </mat-card-title></p></h4>
+                        
+                    </div>
+                 <mat-card>
+                  <div class="card-body" >
+                    <div class="table-responsive">
+                     
+                        <table >
+                              <tbody>
+                                <tr><td>
+                                  <p>La fecha tiene un valor predeterminado y es el primer día hábil de cada mes</p>
+                                  <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Fecha elaboración del documento:</mat-label>
+                                    <input matInput readonly=»readonly» formControlName="firstCtrl" >
+                                  </mat-form-field>
+                                  
+                                </td></tr>
+
+                                <tr>
+                                  <td>
+                                    <p>Soy declarante de renta por el años gravable 2021</p>
+                                    <mat-form-field appearance="fill">
+                                      <mat-label>SELECCIONES:</mat-label>
+                                      <select matNativeControl formControlName="SI0NO" >
+                                        <option value="SI  [X]   NO [  ]">SI</option>
+                                        <option value="SI  [  ]   NO [X]">NO</option>
+                                       
+                                      </select>
+                                    </mat-form-field>
+                                      
+                                     
+                                  </td>
+                                </tr>
+
+                              
+                                
+                              </tbody>
+                        
+                        </table>
+                    </div>
+                </div>
+                  
+                 </mat-card>
+                 <mat-card *ngIf="valorcontrati >= 1">
+                  <mat-label> valor contrato:</mat-label>
+                  <br>
+                <mat-form-field class="example-full-width" appearance="fill" >
+                  <mat-label> valor contrato</mat-label>
+                  <input matInput formControlName="valortotalcontrato" readonly=»readonly» [ngModel]="datosContrato.valor_TOTAL_CONTRATO | currency:'$'">
+                </mat-form-field>
+              </mat-card>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+
+
+
+        <div>
+          <p></p>
+          <button mat-button mat-raised-button color="accent" matStepperNext (click)="nuevosaldo()">CONTINUAR</button>
+        </div>
+
+
+        
+        
+      </form>
+    </mat-step>
+
+
+
+
+    <mat-step [stepControl]="secondFormGroup" errorMessage="faltan datos">
+      <form [formGroup]="secondFormGroup" (ngSubmit)="openPDF(secondFormGroup)">
+        <ng-template matStepLabel>Información periodo a cobrar</ng-template>
+        <br>
+ 
+          <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title "><p><mat-card-title class="titlecenter">A continuación por favor ingresar los datos del periodo a cobrar 
+                                </mat-card-title></p></h4>
+                                
+                            </div>
+
+                       
+                          <div>
+                           
+                              <div class="card card-stats" >
+                                       
+                                <div class="card-header card-header-info card-header-icon">
+                                  <br>
+                                  <p align="center">Señor contratista recuerde que si desea cobrar un periodo diferente a 30 días y máximo 40 días, debe seleccionar las fechas manualmente al dar Click en el Botón "CAMBIAR FECHA" para seleccionar los días manualmente, una vez seleccionado la fecha guarde los cambios con el botón "Aceptar cambios en fecha"</p>
+    
+                                  <!--{{secondFormGroup.value | json}}-->
+                                  <br>
+                                  <div align="center">
+                                  <button *ngIf="buttonDisabled" color="accent" (click)="buttonDisabled = false" mat-button mat-raised-button>CAMBIAR FECHA</button>
+                        
+                                  <!-- enable the button -->
+                                  <button mat-button mat-raised-button align="center" color="primary" *ngIf="!buttonDisabled" (click)="buttonDisabled = true" mat-button mat-raised-button>NO CAMBIAR FECHA</button>    
+                                  <br><br>
+                                </div>
+                                  <br>
+                                  <mat-panel-description>
+                                    
+                                       
+                                  
+                                        <table class="table">
+                                            
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                      <p>FECHA INICIAL A COBRAR</p>
+                                                    </td>
+                                                    <td>
+                                                   
+                                                      <mat-form-field color="accent" appearance="fill">
+                                                        <mat-label>FECHA INICIAL.</mat-label>
+                                                        <input matInput [matDatepicker]="picker1" formControlName="secondCtrl" [disabled]="buttonDisabled" [ngModel]="totalsaldo.fechaInicio" >
+                                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker1></mat-datepicker>
+                                                      </mat-form-field>
+                                                    
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                      <p>FECHA FINAL A COBRAR</p>
+                                                    </td>
+                                                    <td>
+                                                      <mat-form-field color="accent" appearance="fill">
+                          
+                                                        <mat-label>FECHA FINAL.</mat-label>
+                                                        <input matInput [matDatepicker]="picker2" formControlName="secondCtrl1" [disabled]="buttonDisabled" [ngModel]="totalsaldo.fechaFin">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                                                      </mat-form-field>
+                                                      
+                                                    </td>
+                                                </tr>
+                                      
+                                                <tr>
+                                                    <td>
+                                                      <mat-label> SUBTOTAL VALOR A COBRAR:</mat-label>
+                                                    </td>
+                                                    <td>
+                                                
+                                                      <mat-form-field class="example-full-width" appearance="fill" >
+                                                        <mat-label> TOTAL VALOR A COBRAR</mat-label>
+                                                        <input matInput formControlName="secondCtrl2" readonly=»readonly» [ngModel]="sueldo | currency:'$'">
+                                                      </mat-form-field>
+                                                   
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                 <td>
+
+                                                 </td>
+                                                  <td align="center">
+                                                    <button mat-button mat-raised-button  color="primary" (click)="nuevosaldo()" [disabled]="buttonDisabled">Aceptar cambios en fecha</button>
+                                                   
+                                                  </td>  
+                                                     
+                                                </tr>
+                                           <tr>
+                                            <td>
+                                              <div>
+                           
+                                                  <mat-card *ngIf="sueldo <= totalsaldo.count ">
+                                                    <mat-label>TOTAL VALOR A COBRAR :</mat-label>
+                                                    <br>
+                                                    <mat-form-field class="example-full-width" appearance="fill" >
+                                                    <mat-label>VALOR A COBRAR</mat-label>
+                                                    <input matInput formControlName="secondCtrl2" readonly=»readonly» [ngModel]="totalsaldo.count | currency:'$'">
+                                                  </mat-form-field>
+                                                </mat-card>
+                                                </div>
+                                            </td>
+                                            <td>
+                                              <div>
+                                                <mat-card *ngIf="valorcontrati >= 0">
+                                                  <mat-label> VALOR TOTAL CONTRATO:</mat-label>
+                                                  <br>
+                                                <mat-form-field class="example-full-width" appearance="fill" >
+                                                  <mat-label> valor contrato</mat-label>
+                                                  <input matInput formControlName="valortotalcontrato" readonly=»readonly» [ngModel]="datosContrato.valor_TOTAL_CONTRATO | currency:'$'">
+                                                </mat-form-field>
+                                              </mat-card>
+                                              </div>
+                                            </td>
+                                          
+                                           </tr>
+                                           <tr>
+                                            <td>
+                                              <div>
+                                               
+                                                <mat-card>
+                                                  <p>PAGO NUMERO:</p>
+                                                  <mat-form-field appearance="fill">
+                                                    
+                                                    <mat-label>PAGO NUMERO</mat-label>
+                                                    <select matNativeControl required formControlName="secondCtrl3" >
+                                                      <option value="1">1</option>
+                                                      <option value="2">2</option>
+                                                      <option value="3">3</option>
+                                                      <option value="4">4</option>
+                                                      <option value="5">5</option>
+                                                      <option value="6">6</option>
+                                                      <option value="7">7</option>
+                                                      <option value="8">8</option>
+                                                      <option value="9">9</option>
+                                                      <option value="10">10</option>
+                                                      <option value="11">11</option>
+                                                      <option value="12">12</option>
+                                                      <option value="13">13</option>
+                                                      <option value="14">14</option>
+                                                    </select>
+                                                  </mat-form-field>
+                                                  </mat-card>
+                                                </div>
+                                            </td>
+                                            <td>
+                                              <div>
+                                               
+                                                <mat-card>
+                                                  <p>TOTAL PAGOS:</p>
+                                                  <mat-form-field appearance="fill">
+                                                    <mat-label>TOTAL PAGOS</mat-label>
+                                                    <select matNativeControl required formControlName="secondCtrl4">
+                                                      <option value="1">1</option>
+                                                      <option value="2">2</option>
+                                                      <option value="3">3</option>
+                                                      <option value="4">4</option>
+                                                      <option value="5">5</option>
+                                                      <option value="6">6</option>
+                                                      <option value="7">7</option>
+                                                      <option value="8">8</option>
+                                                      <option value="9">9</option>
+                                                      <option value="10">10</option>
+                                                      <option value="11">11</option>
+                                                      <option value="12">12</option>
+                                                      <option value="13">13</option>
+                                                      <option value="14">14</option>
+                                                    </select>
+                                                  </mat-form-field>
+                                                  </mat-card>
+                                              </div>
+                                            </td>
+                                          
+                                           </tr>
+                                               
+                                           
+                                               
+                                            </tbody>
+                                        </table>
+                                       
+                                       
+                                       
+                                      
+                            
+                                </mat-panel-description>
+                                   
+                            </div>
+                            
+                            </div>
+                          
+                          </div>
+
+
+
+                        </div>
+                          
+                    </div>
+                  
+        <div>
+         
+            <div class="card card-stats">
+                     
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">attach_money</i>
+                  </div>
+                  
+                 
+                      <p class="card-category">CALCULO APORTES </p>
+                
+                  <mat-panel-description>
+                  <h3 class="card-title"> VALOR APORTES PARAFISCALES </h3>
+                  
+                      <br>
+                
+                      <table class="table">
+                          
+                          <tbody>
+                              <tr>
+                                  <td>
+                                    <p>No. Contrato</p>
+                                  </td>
+                                  <td>
+                                      <p>{{datosContrato.n_CONTRATO}}</p>
+                                  
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <p>Valor a cobrar periodo actual</p>
+                                  </td>
+                                  <td>
+                                
+                                      
+                                      <input matInput formControlName="valperiodoactual" readonly=»readonly» [ngModel]="totalsaldo.count | currency:'$'" value="{{sueldo | currency:'$'}}">
+                                  
+                                    
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <p>IBC</p>
+                                  </td>
+                                  <td>
+                                  
+                                      
+                                      <input matInput formControlName="toatalibc" readonly=»readonly» [ngModel]="sueldoibc | currency:'$'" value="{{totalsaldo.ibc | currency:'$' }}" >
+                                    
+                                    
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <p>Aporte pensión</p>
+                                  </td>
+                                  <td>
+                                   
+                                      <input matInput formControlName="totalap" readonly=»readonly» value="{{sueldoap | currency:'$' }}" >
+                                
+                                     
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <p>Aporte salud</p>
+                                  </td>
+                                  <td>
+                                    <input matInput formControlName="totalaps" readonly=»readonly» value="{{sueldoarl | currency:'$'}}"> 
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <p>Aporte ARL</p>
+                                  </td>
+                                  <td>
+                                    <input matInput formControlName="totalarl" readonly=»readonly» value="{{suelapfs | currency:'$'}}">
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <p>Clase riesgos</p>
+                                  </td>
+                                  <td>
+                                      <p>{{variableheredada.id_RIESGO}}</p>
+                                  </td>
+                              </tr>
+          
+                              <tr>
+                                  <td>
+                                      <p>Total aportes parafiscales</p>
+                                  </td>
+                                  <td>
+                                    <input matInput formControlName="totalaprs" readonly=»readonly» value="{{sueldotap | currency:'$'}}">
+                                  </td>
+                              </tr>
+                             
+                         
+                             
+                          </tbody>
+                      </table>
+                     
+                  
+          
+              </mat-panel-description>
+                 
+          </div>
+          
+          </div>
+          
+        </div>
+                </div>
+                
+            </div>
+
+         
+     
+
+        <div>
+          <p></p>
+          <button mat-button mat-raised-button color="accent" matStepperPrevious (click)="nuevosaldo()">VOLVER</button> /
+          <button mat-button mat-raised-button color="accent" matStepperNext (click)="nuevosaldo()">CONTINUAR</button>
+        </div>
+      </form>
+
+    </mat-step>
+
+    <mat-step [stepControl]="treFormGroup" errorMessage="faltan datos">
+      <form [formGroup]="treFormGroup" (ngSubmit)="openPDF(treFormGroup)">
+        <ng-template matStepLabel>Informe Parafiscales</ng-template>
+       
+        <br>
+
+        <mat-card>
+          <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                       
+                          
+                            <div class="card-header card-header-danger">
+                              <h4 class="card-title "><p><mat-card-title class="titlecenter">A continuación por favor ingresar la información de parafiscales como: 
+                              </mat-card-title></p></h4>
+                          </div>
+                         
+                        
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+         
+       
+
+        <br>
+        
+        <table class="table">
+        
+                          
+          <tbody>
+              <tr>
+                  <td>
+                    <p>Pin de la planilla:</p>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>PIN PLANILLA</mat-label>
+                      <input matInput placeholder="PIN" value="" formControlName="treeCtrl">
+                    </mat-form-field>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                    <p>Seleccione fecha de pago de la planilla:</p>
+                  </td>
+                  <td>
+                   
+                    <mat-form-field appearance="fill">
+                      <mat-label>FECHA DE PAGO </mat-label>
+                      <input matInput [matDatepicker]="picker3" formControlName="treeCtrl1">
+                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                      <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                    <p>Seleccione periodo mes del pago de la planilla:</p>
+                  </td>
+                  <td>
+                  
+                      
+                 
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>PERIODO:</mat-label>
+                      <select matNativeControl required formControlName="treeCtrl2">
+                        <option value="0"> </option>
+                        <option value="Enero">ENERO</option>
+                        <option value="Febrero">FEBRERO</option>
+                        <option value="Marzo">MARZO</option>
+                        <option value="Abril">ABRIL</option>
+                        <option value="Mayo">MAYO</option>
+                        <option value="Junio">JUNIO</option>
+                        <option value="Julio">JULIO</option>
+                        <option value="Agosto">AGOSTO</option>
+                        <option value="Septiembre">SEPTIEMBRE</option>
+                        <option value="Octubre">OCTUBRE</option>
+                        <option value="Noviembre">NOVIEMBRE</option>
+                        <option value="Diciembre">DICIEMBRE</option>
+                      </select>
+                    </mat-form-field>
+                    
+                    
+                  </td>
+              </tr>
+             
+              <tr>
+                  <td>
+                    <p>Seleccione EPS (Salud):</p>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>EPS</mat-label>
+                      <select matNativeControl required formControlName="treeCtrl3">
+                        <option value="0"> </option>
+                        <option value="Sanitas">Sanitas</option>
+                        <option value="Famisanar">Famisanar</option>
+                        <option value="Humana Vivir">Humana Vivir</option>
+                        <option value="Nueva EPS">Nueva EPS</option>
+                        <option value="Solsalud">Solsalud</option>
+                        <option value="Ecoopsos">Ecoopsos</option>
+                        <option value="Colsubsidio">Colsubsidio</option>
+                        <option value="Caprecom">Caprecom</option>
+                        <option value="Capital Salud">Capital Salud</option>
+                        <option value="Unicajas">Unicajas</option>
+                        <option value="Ecopetrol">Ecopetrol</option>
+                        <option value="Aliansalud">Aliansalud</option>
+                        <option value="Salud Total">Salud Total</option>
+                        <option value="Compensar">Compensar</option>
+                        <option value="Sura">Sura</option>
+                        <option value="Saludcoop">Saludcoop</option>
+                        <option value="Colpatria">Colpatria</option>
+                        <option value="Coomeva">Coomeva</option>
+                        <option value="Cruz Blanca">Cruz Blanca</option>
+                        <option value="Saludvida">Saludvida</option>
+                        <option value="Multimédicas">Multimédicas</option>
+                        <option value="Golden Group">Golden Group</option>
+                        <option value="Servicio Occidental de Salud">Servicio Occidental de Salud</option>
+                        <option value="Salud Condor">Salud Condor</option>
+                        <option value="Medimas">Medimas</option>
+                        <option value="Colmedica">Colmedica</option>
+                        <option value="Comfenalco">Comfenalco</option>
+                        <option value="Convida">Convida</option>
+                        <option value="Coosalud">Coosalud</option>
+                        <option value="Comfacor">Comfacor</option>
+                        <option value="Comfacundi">Comfacundi</option>
+                        <option value="Fosyga">Fosyga</option>
+                      </select>
+                    </mat-form-field>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                    <div>
+                      <p>Estimado Usuario recuerde que si su nivel de Riesgo ARL es 4 ó 5, seleccione la opción N/A:</p>
+                    </div>
+                    <p>Seleccione ARL (Riesgos profesional):</p>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>ARL</mat-label>
+                      <select matNativeControl required formControlName="treeCtrl4">
+                        <option value="N/A">N/A</option>
+                        <option value="POSITIVA">POSITIVA</option>
+                        <option value="SURA">SURA</option>
+                        <option value="MAFRE">MAFRE</option>
+                        <option value="SEGUROS BOLIVAR">SEGUROS BOLIVAR </option>
+                        <option value="LA EQUIDAD SEGUROS">LA EQUIDAD SEGUROS </option>
+                        <option value="LIBERTY SEGUROS">LIBERTY SEGUROS </option>
+                        <option value="COLMENA">COLMENA</option>
+                        <option value="AXA COLPATRIA">AXA COLPATRIA</option>
+                        <option value="SEGUROS ALFA">SEGUROS ALFA</option>
+                        <option value="SEGUROS AURA">SEGUROS AURA</option>
+            
+                      </select>
+                    </mat-form-field>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                    <p>Seleccione fondo de Pension:</p>
+                  </td>
+                  <td>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>PENSION</mat-label>
+                      <select matNativeControl required formControlName="treeCtrl5">
+                        <option value="0"> </option>
+                        <option value="COLPENSIONES">COLPENSIONES</option>
+                        <option value="PROTECCIÓN">PROTECCIÓN</option>
+                        <option value="PORVENIR">PORVENIR</option>
+                        <option value="COLFONDOS">COLFONDOS</option>
+                        <option value="OLD MUTUAL">OLD MUTUAL</option>
+                        <option value="SKANDIA">SKANDIA</option>
+                        <option value="FIDUDAVIVIENDA">FIDUDAVIVIENDA</option>
+                        <option value="FIDUALIANZA ABIERTO VISIÓN">FIDUALIANZA ABIERTO VISIÓN</option>
+                        <option value="COLSEGUROS">COLSEGUROS</option>
+                        <option value="FIDOPOPULAR">FIDOPOPULAR</option>
+                        <option value="SERVITRUST">SERVITRUST</option>
+                        <option value="FOSYGA">FOSYGA</option>
+                      </select>
+                    </mat-form-field>
+                  </td>
+              </tr>
+
+              
+             
+          </tbody>
+      </table>
+
+      
+       
+    </mat-card>
+    <mat-card><br>
+      <p class="titlecenter">Estimado usuario: si necesita el anexar una segunda planilla, por favor dar click al Botón "AGREGAR PLANILLA No. 2"</p>
+      <br>
+      <button *ngIf="buttonDisabled3 == true" color="accent" (click)="showDataPlanilla()" mat-button mat-raised-button>AGREGAR PLANILLA No. 2</button>
+      <!-- enable the button -->
+      <button *ngIf="!buttonDisabled3" color="accent" (click)="hideDataPlanilla()" mat-button mat-raised-button>CANCELAR</button>    
+      <br><br>
+      <p class="titlecenter"> De lo contrario, por favor dar click en continuar. </p>
+            
+  </mat-card>
+  <div>
+  <table class="table" *ngIf="buttonDisabled3 == false">        
+    <tbody>
+        <tr>
+            <td>
+              <p>Pin de la planilla # 2:</p>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>PIN PLANILLA No. 2</mat-label>
+                <input matInput placeholder="PIN" value="" formControlName="pin2">
+              </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <p>Seleccione fecha de pago de la planilla No. 2:</p>
+            </td>
+            <td>
+             
+              <mat-form-field appearance="fill">
+                <mat-label>FECHA DE PAGO </mat-label>
+                <input matInput [matDatepicker]="picker3" formControlName="pin2fechapago">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Seleccione periodo mes del pago de la planilla:</p>
+          </td>
+          <td>
+          
+              
+         
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>PERIODO:</mat-label>
+              <select matNativeControl required formControlName="pin2periodo">
+                <option value="0"> </option>
+                <option value="Enero">ENERO</option>
+                <option value="Febrero">FEBRERO</option>
+                <option value="Marzo">MARZO</option>
+                <option value="Abril">ABRIL</option>
+                <option value="Mayo">MAYO</option>
+                <option value="Junio">JUNIO</option>
+                <option value="Julio">JULIO</option>
+                <option value="Agosto">AGOSTO</option>
+                <option value="Septiembre">SEPTIEMBRE</option>
+                <option value="Octubre">OCTUBRE</option>
+                <option value="Noviembre">NOVIEMBRE</option>
+                <option value="Diciembre">DICIEMBRE</option>
+              </select>
+            </mat-form-field>
+            
+            
+          </td>
+      </tr>
+
+        
+       
+    </tbody>
+</table>
+</div>
+        <br>
+     
+        <div>
+          <p></p>
+          <button mat-button mat-raised-button color="accent" matStepperPrevious>VOLVER</button> /
+          <button mat-button mat-raised-button color="accent" matStepperNext>CONTINUAR</button>
+        </div>
+        <br>
+        </form>
+
+        <mat-step [stepControl]="cuaFormGroup" errorMessage="faltan datos">
+          <form [formGroup]="cuaFormGroup" (ngSubmit)="openPDF(cuaFormGroup)">
+          <br>
+        
+          <ng-template matStepLabel>Informe de Actividades</ng-template>
+          <div class="row">
+         
+            <br>
+            
+              <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                              <div class="card-header card-header-danger">
+                                <h4 class="card-title "><p><mat-card-title class="titlecenter">A continuación por favor diligenciar el informe de actividades dando click en cada unos los campos: actividad, producto y evidencia:
+                                </mat-card-title></p></h4>
+                            </div>
+                              
+                                <br><br>
+
+
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_1 != ''">
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h3 class="card-title ">
+                                                   <p>OBLIGACION ESPECIFICA No.1 </p>
+                                                    {{obligacioneslist2.obligacion_1}}
+                                                    
+                                                  </h3>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                          <div  class="row">
+                                            
+                                              <div class="col-4">
+                                                <mat-card>
+                                                <p>ACTIVIDAD</p>
+                                                <textarea type="text" formControlName="act1" required class="form-control" id="actividad" 
+                                                  ></textarea>
+                                                </mat-card>
+                                              </div>
+                                              <div class="col-4">
+                                                <mat-card>
+                                                <p>PRODUCTO</p>
+                                                <textarea type="text" formControlName="prod1" required class="form-control" id="producto"
+                                                  ></textarea>
+                                                </mat-card>
+                                              </div>
+                                              <div class="col-4">
+                                                <mat-card>
+                                                <p>EVIDENCIA</p>
+                                                <textarea type="text" formControlName="evid1" required class="form-control" id="evidencia" 
+                                                  ></textarea>
+                                                </mat-card>
+                                              </div>
+                                          </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+                            
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_2 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th > 
+                                                  <div class="card-header" >
+                                                    <h4 class="card-title">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.2 </p>
+                                                      {{obligacioneslist2.obligacion_2}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                  
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act2" required class="form-control" id="actividad" ></textarea>
+                                                </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod2" required class="form-control" id="producto"></textarea>
+                                                </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid2" required class="form-control" id="evidencia"></textarea>
+                                                </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                           
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_3 !='Null'">
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table >
+                                            <thead >
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.3 </p>
+                                                      {{obligacioneslist2.obligacion_3}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act3" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                  </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod3" required class="form-control" id="producto"
+                                                   ></textarea>
+                                                    </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid3" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+
+                             
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_4 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.4 </p>
+                                                      {{obligacioneslist2.obligacion_4}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act4" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod4" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid4" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+
+                              
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_5 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.5 </p>
+                                                      {{obligacioneslist2.obligacion_5}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act5" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod5"  required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid5" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                        
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_6 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.6 </p>
+                                                      {{obligacioneslist2.obligacion_6}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act6" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod6" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid6" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                  
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_7 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.7 </p>
+                                                      {{obligacioneslist2.obligacion_7}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act7" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod7" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid7" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                        
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_8 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.8 </p>
+                                                      {{obligacioneslist2.obligacion_8}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act8" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod8" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid8" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+               
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_9 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.9 </p>
+                                                      {{obligacioneslist2.obligacion_9}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act9" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod9" required class="form-control" id="producto"
+                                                   ></textarea>
+                                                </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid9" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                    
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_10 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.10 </p>
+                                                      {{obligacioneslist2.obligacion_10}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act10" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod10" required class="form-control" id="producto"
+                                                   ></textarea>
+                                                </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid10" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                 
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_11 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.11 </p>
+                                                      {{obligacioneslist2.obligacion_11}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act11" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod11" required class="form-control" id="producto"
+                                                   ></textarea>
+                                                </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid11" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                             
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_12 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.12 </p>
+                                                      {{obligacioneslist2.obligacion_12}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act12" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod12" required class="form-control" id="producto"
+                                                   ></textarea>
+                                                </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid12" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>                      
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                 
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_13 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.13 </p>
+                                                      {{obligacioneslist2.obligacion_13}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act13" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod13" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid13" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                    
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_14 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.14 </p>
+                                                      {{obligacioneslist2.obligacion_14}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act14" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod14" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid14" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                         
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_15 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.15 </p>
+                                                      {{obligacioneslist2.obligacion_15}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act15" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod15" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid15" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                      
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_16 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.16 </p>
+                                                      {{obligacioneslist2.obligacion_16}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act16" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod16" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid16" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                         
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_17 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.17 </p>
+                                                      {{obligacioneslist2.obligacion_17}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act17" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod17" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid17" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>              
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                   
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_18 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.18 </p>
+                                                      {{obligacioneslist2.obligacion_18}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act18" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod18" required class="form-control" id="producto"
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid18" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                                      <br><br>
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                        
+                                  <div class="row" *ngIf="obligacioneslist2.obligacion_19 !=''" >
+                                    <div class="col-12" align="left">
+                                      
+                                      <div>
+                            
+                                          <table>
+                                            <thead>
+                                                <th> 
+                                                  <div class="card-header ">
+                                                    <h4 class="card-title ">
+                                                   
+                                                      <p>OBLIGACION ESPECIFICA No.19 </p>
+                                                      {{obligacioneslist2.obligacion_19}}
+                                                    
+                                                  </h4>
+                                                  
+                                                </div></th>
+                                                
+                                            </thead>
+                                            
+                                        </table>
+                                        
+                                        <br><br>
+                                        <div  class="row">
+                                            
+                                          <!--   <p>{{cuaFormGroup.value | json}}</p>-->
+                                               
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>ACTIVIDAD</p>
+                                                 <textarea type="text" formControlName="act19" required class="form-control" id="actividad" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>PRODUCTO</p>
+                                                 <textarea type="text" formControlName="prod19" required class="form-control" id="producto"
+                                                   ></textarea>
+                           </mat-card>
+                                               </div>
+                                               <div class="col-4">
+                                                <mat-card>
+                                                 <p>EVIDENCIA</p>
+                                                 <textarea type="text" formControlName="evid19" required class="form-control" id="evidencia" 
+                                                   ></textarea>
+                                                 </mat-card>
+                                               </div>
+                                           </div>
+                                                                                  
+                                          
+                                      
+                               
+                                    </div>
+                                      
+                                    
+                                    </div>
+                                  </div>
+
+                          
+                       
+                                          
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+              </div>
+       
+            
+          </div>
+          
+       
+        <br>
+
+        <div>
+          <button mat-button mat-raised-button color="accent" matStepperPrevious>VOLVER</button> /
+          <button mat-button mat-raised-button color="accent" matStepperNext>CONTINUAR</button>
+         
+        </div>
+
+      </form>
+
+        </mat-step>
+
+       <mat-step [stepControl]="cinFormGroup" errorMessage="faltan datos">
+        <form [formGroup]="cinFormGroup" (ngSubmit)="openPDF(cinFormGroup)">
+          <br>
+        <mat-card>
+          <ng-template matStepLabel>Informe de Supervisión</ng-template>
+          
+            <mat-card><br>
+              <p class="titlecenter">Estimado usuario: si su contrato pertenece a presupuestos participativos por favor diligencie el informe de supervisión, dando click en el siguiente botón: </p>
+              <br>
+              <button *ngIf="buttonDisabled2 == true" color="accent" (click)="showData()" mat-button mat-raised-button>DILIGENCIAR INFORME DE SUPERVISION</button>
+              <!-- enable the button -->
+              <button *ngIf="!buttonDisabled2" color="accent" (click)="hideData()" mat-button mat-raised-button>CANCELAR</button>    
+              <br><br>
+              <p class="titlecenter"> De lo contrario, por favor dar click en continuar. </p>
+                    
+          </mat-card>
+             
+          <div class="main-content" *ngIf="buttonDisabled2 == false">
+            <br><br>
+            <div class="card-header card-header-danger">
+              <h4 class="card-title "><p><mat-card-title class="titlecenter">A continuación por favor ingresar la información del Informe de Supervisión. 
+              </mat-card-title></p></h4>
+          </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title"><p>SEGUIMIENTO JURÍDICO</p></h4>
+                            </div>
+
+                           
+                            <mat-card align="center">
+                              <br>
+
+                              <table class="table" >
+                               
+                                <tbody>
+                                  <td>
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                      <mat-label>NOMBRE DEL CONTRATISTA:</mat-label>
+                                      <input  matInput readonly=»readonly» [ngModel]="variableheredada.nombres" formControlName="cinCtrl3">
+                                    </mat-form-field>
+                                  </td>
+
+                                  <td>
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                      <mat-label>No. CONTRATO:</mat-label>
+                                      <input matInput readonly=»readonly» [ngModel]="datosContrato.n_CONTRATO"  formControlName="cinCtrl1">
+                                    </mat-form-field>
+                                  </td>
+                                  <td>
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                      <mat-label>No. PAGO:</mat-label>
+                                      <input matInput formControlName="cinCtrl2" >
+                                    </mat-form-field>
+                                  </td>
+                                </tbody>
+                              </table>
+                             
+                            <table class="table">
+                            <tbody>
+                              <tr>
+                                                                                       
+                                <td>
+                                  
+                                  <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>FECHA INICIAL.</mat-label>
+                                    <input  matInput readonly=»readonly» [ngModel]="datosContrato.fecha_INICIO_CONTRATO" formControlName="cinCtrl5">
+                                  </mat-form-field>
+                                 
+                                  
+                                </td>
+                                <td>
+                                  <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>FECHA FINAL.</mat-label>
+                                    <input  matInput readonly=»readonly» [ngModel]="datosContrato.fecha_FINAL_CONTRATO" formControlName="cinCtrl6">
+                                  </mat-form-field>
+                                </td>
+                              </tr>
+                           
+                            </tbody>
+                            </table>
+                           
+                          </mat-card>
+                          <br>
+                          <p>OBJETO DEL CONTRATO: </p>
+                          <mat-form-field appearance="fill">
+                                            
+                            <textarea  cols="50" matInput readonly=»readonly» [ngModel]="datosContrato.objeto_CONTRATO" formControlName="cinCtrl4">{{datosContrato.objeto_CONTRATO}}</textarea>
+                          </mat-form-field>
+                          
+                        </div>
+                        
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+          <br>
+
+
+          <div class="main-content" *ngIf="buttonDisabled2 == false">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title "><p>MODIFICACIONES CONTRACTUALES</p></h4>
+                                
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead >
+                                            <th>
+                                              <p>TIPO DE MODIFICACIÓN</p>
+                                            </th>
+                                            <th>
+                                              <p>FECHA DE INICIO DE LA MODIFICACIÓN</p>
+                                            </th>
+                                            <th>
+                                              <p>TIPO DE MODIFICACIÓN</p>
+                                            </th>
+                                            <th>
+                                              <p>NO.PÓLIZA APROBADA Y VIGENTE</p>
+                                            </th>
+                                           
+                                           
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                  <p>ADICIÓN</p>
+                                                </td>
+                                                <td>
+                                                  <mat-form-field color="accent" appearance="fill">
+                                                    <mat-label>FECHA INICIAL.</mat-label>
+                                                    <input matInput [matDatepicker]="picker1" formControlName="cinCtrl7" value="">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                  </mat-form-field>
+                                                
+                                                </td><td>
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>TIPO DE MODIFICACION</mat-label>
+                                                    <input matInput placeholder="TIPO DE MODIFICACION" value="" formControlName="cinCtrl8">
+                                                  </mat-form-field>
+                                                </td><td>
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>NO.PÓLIZA APROBADA Y VIGENTE</mat-label>
+                                                    <input matInput placeholder="NO.PÓLIZA APROBADA Y VIGENTE" value="" formControlName="cinCtrl9" >
+                                                  </mat-form-field>
+                                                </td>
+        
+                                                
+                                               
+                                                
+                                            </tr>
+        
+                                            <tr>
+                                                <td>
+                                                  <p>PRORROGA</p>
+                                                </td>
+                                                <td>
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>FECHA INICIAL.</mat-label>
+                                                    <input matInput [matDatepicker]="picker2" formControlName="cinCtrl10" >
+                                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker2></mat-datepicker>
+                                                  </mat-form-field>
+                                                 
+                                                </td><td>
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>TIPO DE MODIFICACION</mat-label>
+                                                    <input matInput placeholder="TIPO DE MODIFICACION" value="" formControlName="cinCtrl11">
+                                                  </mat-form-field>
+                                                </td><td>
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>NO.PÓLIZA APROBADA Y VIGENTE</mat-label>
+                                                    <input matInput placeholder="NO.PÓLIZA APROBADA Y VIGENTE" value="" formControlName="cinCtrl12" >
+                                                  </mat-form-field>
+                                                </td>
+                                               
+        
+                                            </tr>
+        
+                                            <tr>
+                                                <td>
+                                                  <p>SUSPENSIÓN</p>
+                                                </td>
+                                                <td>
+                                                  <mat-form-field color="accent" appearance="fill">
+                                                    <mat-label>FECHA INICIAL.</mat-label>
+                                                    <input matInput [matDatepicker]="picker3" formControlName="cinCtrl13">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker3></mat-datepicker>
+                                                  </mat-form-field>
+                                                  
+                                                </td><td>
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>TIPO DE MODIFICACION</mat-label>
+                                                    <input matInput placeholder="TIPO DE MODIFICACION" value="" formControlName="cinCtrl14">
+                                                  </mat-form-field>
+                                                </td><td>
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>NO.PÓLIZA APROBADA Y VIGENTE</mat-label>
+                                                    <input matInput placeholder="NO.PÓLIZA APROBADA Y VIGENTE" formControlName="cinCtrl15" value="">
+                                                  </mat-form-field>
+                                                </td>
+                                               
+        
+                                            </tr>
+                                            <tr>
+                                              <td>
+                                                <p>TERMINACIÓN ANTICIPADA</p>
+                                              </td>
+                                              <td>
+                                                <mat-form-field color="accent" appearance="fill">
+                                                  <mat-label>FECHA INICIAL.</mat-label>
+                                                  <input matInput [matDatepicker]="picker5" formControlName="terminacionanticipadaA">
+                                                  <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                                                  <mat-datepicker #picker5></mat-datepicker>
+                                                </mat-form-field>
+                                                
+                                              </td><td>
+                                                <mat-form-field class="example-full-width" appearance="fill">
+                                                  <mat-label>TIPO DE MODIFICACION</mat-label>
+                                                  <input matInput placeholder="TIPO DE MODIFICACION" value="" formControlName="terminacionanticipadaP">
+                                                </mat-form-field>
+                                              </td><td>
+                                                <mat-form-field class="example-full-width" appearance="fill">
+                                                  <mat-label>NO.PÓLIZA APROBADA Y VIGENTE</mat-label>
+                                                  <input matInput placeholder="NO.PÓLIZA APROBADA Y VIGENTE" formControlName="terminacionanticipadaE" value="">
+                                                </mat-form-field>
+                                              </td>
+                                             
+      
+                                          </tr>
+                                         
+                                        <tr>
+                                          <td>
+                                            <p>CESIÓN</p>
+                                          </td>
+                                          <td>
+                                            <mat-form-field color="accent" appearance="fill">
+                                              <mat-label>FECHA INICIAL.</mat-label>
+                                              <input matInput [matDatepicker]="picker6" formControlName="cesioncontratoA">
+                                              <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                                              <mat-datepicker #picker6></mat-datepicker>
+                                            </mat-form-field>
+                                            
+                                          </td><td>
+                                            <mat-form-field class="example-full-width" appearance="fill">
+                                              <mat-label>TIPO DE MODIFICACION</mat-label>
+                                              <input matInput placeholder="TIPO DE MODIFICACION" value="" formControlName="cesioncontratoP">
+                                            </mat-form-field>
+                                          </td><td>
+                                            <mat-form-field class="example-full-width" appearance="fill">
+                                              <mat-label>NO.PÓLIZA APROBADA Y VIGENTE</mat-label>
+                                              <input matInput placeholder="NO.PÓLIZA APROBADA Y VIGENTE" formControlName="cesioncontratoE" value="">
+                                            </mat-form-field>
+                                          </td>
+                                         
+  
+                                      </tr>
+        
+                                            <tr>
+                                                <td>
+                                                  <p>OTRO SI</p>
+                                                </td>
+                                                <td>
+                                                  <mat-form-field color="accent" appearance="fill">
+                                                    <mat-label>FECHA INICIAL.</mat-label>
+                                                    <input matInput [matDatepicker]="picker4" formControlName="cinCtrl16" >
+                                                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker4></mat-datepicker>
+                                                  </mat-form-field>
+                                                  
+                                                </td><td>
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>TIPO DE MODIFICACION</mat-label>
+                                                    <input matInput placeholder="TIPO DE MODIFICACION" formControlName="cinCtrl17" value="">
+                                                  </mat-form-field>
+                                                </td><td>
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>NO.PÓLIZA APROBADA Y VIGENTE</mat-label>
+                                                    <input matInput placeholder="NO.PÓLIZA APROBADA Y VIGENTE" formControlName="cinCtrl18" value="">
+                                                  </mat-form-field>
+                                                </td>
+                                       
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+
+          <div class="main-content" *ngIf="buttonDisabled2 == false">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title "><p>OBSERVACIONES</p></h4>
+                                
+                            </div>
+                          <br>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                              <mat-label>OBSERVACIONES</mat-label>
+                              <textarea matInput placeholder="OBSERVACIONES" formControlName="cinCtrl19" ></textarea>
+                            </mat-form-field>
+                          
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+
+
+          <div class="main-content"*ngIf="buttonDisabled2 == false">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title "><p>SEGUIMIENTO TÉCNICO - ADMINISTRATIVO<p></h4>
+                                
+                            </div>
+                          <br>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                              <mat-label>SEGUIMIENTO TÉCNICO - ADMINSTRATIVO</mat-label>
+                              <textarea matInput placeholder="SEGUIMIENTO TÉCNICO - ADMINSTRATIVO" formControlName="cinCtrl20" ></textarea>
+                           
+                  
+                            </mat-form-field>
+                          
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+          <div class="main-content"*ngIf="buttonDisabled2 == false">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title "><p>SEGUIMIENTO FINANCIERO<p></h4>
+                                
+                            </div>
+                          <br>
+                          <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <th>
+                                          <p>CONCEPTO</p>
+                                        </th>
+                                        <th>
+                                          <p>VALOR</p>
+                                        </th>
+                                      
+                                       
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                              <p>VALOR INICIAL</p>
+                                            </td>
+                                            <td>
+                                              <mat-form-field class="example-full-width" appearance="fill">
+                                                <mat-label>VALOR INICIAL</mat-label>
+                                                <input matInput placeholder="VALOR INICIAL" [ngModel]="datosContrato.valor_TOTAL_CONTRATO | currency:'$'" formControlName="cinCtrl21">
+                                              </mat-form-field>
+                                         
+                                            </td>
+    
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <p>VALOR ADICIONAL No. 1</p>
+                                          </td>
+                                          <td>
+                                            <mat-form-field class="example-full-width" appearance="fill">
+                                              <mat-label>VALOR ADICIONAL No. 1</mat-label>
+                                              <input matInput placeholder="VALOR ADICIONAL No. 1" value="" formControlName="cinCtrl22" >
+                                            </mat-form-field>
+                                       
+                                          </td>
+  
+                                      </tr>
+  
+                                      <tr>
+                                        <td>
+                                          <p>VALOR ADICIONAL No. 2</p>
+                                        </td>
+                                        <td>
+                                          <mat-form-field class="example-full-width" appearance="fill">
+                                            <mat-label>VALOR ADICIONAL No. 2</mat-label>
+                                            <input matInput placeholder="VALOR ADICIONAL No. 2" value="" formControlName="cinCtrl23" >
+                                          </mat-form-field>
+                                     
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                      <td>
+                                        <p>VALOR TOTAL</p>
+                                      </td>
+                                      <td>
+                                        <mat-form-field class="example-full-width" appearance="fill">
+                                          <mat-label>VALOR TOTAL</mat-label>
+                                          <input matInput placeholder="VALOR TOTAL" [ngModel]="datosContrato.valor_TOTAL_CONTRATO | currency:'$'" formControlName="cinCtrl24">
+                                        </mat-form-field>
+                                   
+                                      </td>
+
+                                  </tr>
+
+                                  <tr>
+                                    <td>
+                                      <p>PAGO No. 1</p>
+                                    </td>
+                                    <td>
+                                      <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>PAGO No. 1</mat-label>
+                                        <input matInput placeholder="PAGO No. 1" value="" formControlName="cinCtrl25">
+                                      </mat-form-field>
+                                 
+                                    </td>
+
+                                </tr>
+
+                                  <tr>
+                                            <td>
+                                              <p>PAGO No. 2</p>
+                                            </td>
+                                            <td>
+                                              <mat-form-field class="example-full-width" appearance="fill">
+                                                <mat-label>PAGO No. 2</mat-label>
+                                                <input matInput placeholder="PAGO No. 2" formControlName="cinCtrl26" value="">
+                                              </mat-form-field>
+                                         
+                                            </td>
+    
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <p>PAGO No. 3</p>
+                                          </td>
+                                          <td>
+                                            <mat-form-field class="example-full-width" appearance="fill">
+                                              <mat-label>PAGO No. 3</mat-label>
+                                              <input matInput placeholder="PAGO No. 3" formControlName="cinCtrl27" value="">
+                                            </mat-form-field>
+                                       
+                                          </td>
+  
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <p>PAGO No. 4</p>
+                                        </td>
+                                        <td>
+                                          <mat-form-field class="example-full-width" appearance="fill">
+                                            <mat-label>PAGO No. 4</mat-label>
+                                            <input matInput placeholder="PAGO No. 4" value=""  formControlName="cinCtrl28">
+                                          </mat-form-field>
+                                     
+                                        </td>
+
+                                    </tr>
+
+    
+                                        <tr>
+                                            <td>
+                                              <p>PAGO No. 5</p>
+                                            </td>
+                                            <td>
+                                              <mat-form-field class="example-full-width" appearance="fill">
+                                                <mat-label>PAGO No. 5</mat-label>
+                                                <input matInput placeholder="PAGO No. 5" value="" formControlName="cinCtrl29">
+                                              </mat-form-field>
+                                            </td>
+    
+                                        </tr>
+    
+                                        <tr>
+                                            <td>
+                                              <p>PAGO No. 6</p>
+                                            </td>
+                                            <td>
+                                              <mat-form-field class="example-full-width" appearance="fill">
+                                                <mat-label>PAGO No. 6</mat-label>
+                                                <input matInput placeholder="PAGO No. 6" value="" formControlName="cinCtrl30">
+                                              </mat-form-field>
+                                            </td>
+                                           
+    
+                                        </tr>
+    
+                                        <tr>
+                                            <td>
+                                              <p>SALDO (VALOR TOTAL - TOTAL PAGOS)</p>
+                                            </td>
+                                            <td>
+                                              <mat-form-field class="example-full-width" appearance="fill">
+                                                <mat-label>SALDO</mat-label>
+                                                <input matInput placeholder="SALDO" value="" formControlName="cinCtrl31" >
+                                              </mat-form-field>
+                                            </td>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                          
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+          </div>
+         
+          <div class="main-content" *ngIf="buttonDisabled2 == false">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title "><p>SEGUIMIENTO FINANCIERO<p></h4>
+                                
+                            </div>
+                          <br>
+                          <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <th>
+                                          <p>CONCEPTO</p>
+                                        </th>
+                                        <th>
+                                          <p>DESCRIPCIÓN</p>
+                                        </th>
+                                      
+                                       
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                              <p>CÓDIGO DE LA PROPUESTA</p>
+                                            </td>
+                                            <td>
+                                              <mat-form-field class="example-full-width" appearance="fill">
+                                                <mat-label>SELECCIONE CÓDIGO DE LA PROPUESTA</mat-label>
+                                                <select matNativeControl formControlName="cinCtrl33" (ngModelChange)="onChange($event)">
+                                                  <option *ngFor="let p of Propuesta" ngValue="{{p.codigo_Propuesta}}">{{p.codigo_Propuesta}}</option>               
+                                                </select>
+                                                
+                                              </mat-form-field>
+                                               
+                                            </td>
+    
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <p>No. PROYECTO INVERSIÓN</p>
+                                          </td>
+                                          <td>
+                                            <mat-form-field class="example-full-width" appearance="fill">
+                                              <mat-label>No. PROYECTO INVERSIÓN</mat-label>
+                                              <input matInput placeholder="SALDO" [ngModel]="pinmusi.consulta_Codigo_Proyecto" formControlName="cinCtrl34" >
+                                             
+                                            </mat-form-field>
+                                            
+                                          </td>
+  
+                                      </tr>
+  
+                                      <tr>
+                                        <td>
+                                          <p>NOMBRE DEL PROYECTO</p>
+                                        </td>
+                                        <td>
+                                          <mat-form-field class="example-full-width" appearance="fill">
+                                            
+                                            <mat-label>NOMBRE DEL PROYECTO</mat-label>
+                                            <input matInput placeholder="SALDO" [ngModel]="pinmusi.nombre_Proyecto" formControlName="cinCtrl35" >
+                                                                                      
+                                          </mat-form-field>
+
+                                                                              
+
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                      <td>
+                                        <p>META ASIGNADAD PROYECTO INVERSIÓN</p>
+                                      </td>
+                                      <td>
+                                        <mat-form-field class="example-full-width" appearance="fill">
+                                          <mat-label>META ASIGNADAD PROYECTO INVERSIÓN</mat-label>
+                                          <input matInput placeholder="SALDO" [ngModel]="pinmusi.meta_Proyecto" formControlName="cinCtrl36" >
+                                          
+                                        </mat-form-field>
+                                   
+                                      </td>
+
+                                  </tr>
+
+                                  <tr>
+                                    <td>
+                                      <p>SECTOR</p>
+                                    </td>
+                                    <td>
+                                      <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>SECTOR</mat-label>
+                                        <input matInput placeholder="SALDO" [ngModel]="pinmusi.sector" formControlName="cinCtrl37" >
+                                        </mat-form-field>
+                                 
+                                    </td>
+
+                                </tr>
+
+                                  <tr>
+                                            <td>
+                                              <p>PROPUESTA CIUDADANA</p>
+                                            </td>
+                                            <td>
+                                              <mat-form-field class="example-full-width" appearance="fill">
+                                                <mat-label>PROPUESTA CIUDADANA</mat-label>
+                                                <input matInput placeholder="SALDO" [ngModel]="pinmusi.propuesta_Ciudadana" formControlName="cinCtrl38" >
+                                                </mat-form-field>
+                                         
+                                            </td>
+    
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <p>MAGNITUD META PROGRAMADA</p>
+                                          </td>
+                                          <td>
+                                            <mat-form-field class="example-full-width" appearance="fill">
+                                              <mat-label>DILIGENCIAR</mat-label>
+                                              
+                                              <input matInput placeholder="MAGNITUD META PROGRAMADA" value="" formControlName="cinCtrl39" >
+                                            </mat-form-field>
+                                       
+                                          </td>
+  
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <p>MAGNITUD META AVANZADA</p>
+                                        </td>
+                                        <td>
+                                          <mat-form-field class="example-full-width" appearance="fill">
+                                            <mat-label>DILIGENCIAR</mat-label>
+                                            <input matInput placeholder="MAGNITUD META AVANZADA" value="" formControlName="cinCtrl40">
+                                          </mat-form-field>
+                                     
+                                        </td>
+
+                                    </tr>
+
+    
+                                    
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                          
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+            
+          </div>
+          <button mat-button mat-raised-button color="accent" matStepperPrevious>VOLVER</button> /
+          <button mat-button mat-raised-button color="accent" matStepperNext>CONTINUAR</button>
+          </mat-card>
+       
+        <br>
+       
+      </form>
+        </mat-step>
+        <mat-step [stepControl]="firmafill">
+          <form [formGroup]="firmafill" (ngSubmit)="openPDF(firmafill)">
+          <br>
+       
+          <ng-template matStepLabel>DESCARGAR PDF DEL GENERADOR</ng-template>
+         
+         
+            <br>
+           
+              <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                              
+                              <div class="card-header card-header-danger">
+                                <h2 class="card-title"><p>FIRMA Y GENERA TUS DOCUMENTOS PDF<p></h2>
+                                
+                            </div>
+                             
+                                      <div class="card card-stats">
+                                          <div class="card-header  card-header-success card-header-icon">
+                                            <mat-card>
+                                              <div class="card-icon" align="center">
+                                                  <i class="material-icons">border_color</i>
+                                              </div>
+                                              <br>
+                                              <h3><p align="center">Para firmar los documentos pdf, por favor dar click en elegir el archivo y seleccionar la firma en formato imagen (tipo .png): </p>
+                                              </h3> 
+                                              <div align="center">                                          
+                                                  <input type="file" formControlName="firmauser" (change)="capturarfirma($event)" name="file">
+                                                  <br>
+                                                </div>
+                                              </mat-card>
+                                              <br>
+                                              <mat-card *ngIf="previsualizacion">
+                                                <h2 align="center"><p>Vista preliminar firma:<p></h2>
+                                                <div class="preview-img"  align="center">
+                                                  
+                                                  <img  [src]="previsualizacion" alt="" style="width: 20%">
+                                                  <br><br>
+                                                  <!--<button mat-stroked-button  color="primary" type="button">GUARDAR</button>
+                                                  <button mat-stroked-button  color="primary" type="button" (click)="clearImage()">ELIMINAR</button>-->
+                                              </div>
+                                            
+                                              </mat-card>  <br>
+                                              
+                                          </div>
+                                        
+                                        <mat-card *ngIf="previsualizacion">
+                                              <div align="center" class="card">
+                                                <div class="card-header card-header-danger">
+                                                  <h2 class="card-title"><p>DESCARGA TUS DOCUMENTOS PDF<p></h2>
+                                              </div>
+                                              <br><br>
+                                              <h2 align="center"><p>Estimado funcionario: por favor descargue cada uno de los documentos dando click en el boton correspondiente.<p></h2>
+                                            <br>
+                                                <!--<button mat-stroked-button color="primary" type="submit">ENVIAR CUENTA DE COBRO</button> -->
+                                                <button mat-raised-button color="primary" (click)="PDFCertificadoCumplimento('print')" >DESCARGAR PDF CERTIFICADO CUMPLIMIENTO</button><br>
+                                                <button mat-raised-button color="primary" (click)="PdfCeuntadeCobro('print')">DESCARGAR PDF CUENTA DE COBRO</button><br>
+                                                <button mat-raised-button color="primary" (click)="PdfInformeSupervisor('print')">DESCARGAR PDF INFORME A SUPERVISOR</button><br>
+                                                <button mat-raised-button color="primary" (click)="PDFinformeActividaes('print')">DESCARGAR PDF INFORME DE ACTIVIDADES</button>
+                                              </div>              
+                                            </mat-card>  
+                                        
+                                      </div>
+                                
+                                    </div> 
+
+                                   
+                          
+                               
+                                
+                     
+                        </div>
+                      
+                    </div>
+                </div>
+              </div>
+       
+            
+         
+       
+        <br>
+
+        <div>
+          <button mat-button mat-raised-button color="accent" matStepperPrevious>VOLVER</button>
+          
+         
+        </div>
+
+      </form>
+        </mat-step>
+
+
+        <div>
+
+        </div>
+      
+    
+    </mat-step>
+
+    
+
+  </mat-stepper>
+</div>
+

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/6b577526-eac8-44b0-bdf9-e68f35c599ee/location/centralus/subscriptions/6b577526-eac8-44b0-bdf9-e68f35c599ee/resourceGroups/generador_cuenta/providers/Microsoft.Web/sites/subalabcuentacobro",
+    "appService.deploySubpath": "dist"
+}

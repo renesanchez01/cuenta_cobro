@@ -1,0 +1,77 @@
+<div  class="body">
+<div class="login">
+  
+   
+    <div class="container mt-5">
+       
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+ 
+   <form [formGroup]="formCap" (ngSubmit)="Logapi()" *ngIf="!loading">
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+                  <mat-card>
+                              <img src="https://static.wixstatic.com/media/b5433a_5dfe707767454914aec991d60a295e74~mv2.png/v1/crop/x_0,y_32,w_1738,h_442/fill/w_434,h_110,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo-subalab-1-.png" style="width:auto;height:80px;object-fit:cover;object-position:50% 50%"> 
+                              <br>
+                              <br>
+                            </mat-card>
+                                <mat-card-content>
+                                    <br>
+                                
+                                      <mat-card>
+                                       
+                                       <span>INGRESE POR FAVOR SU No. CEDULA</span>
+                                       <span class="text-danger ml-2" *ngIf="formCap.get('UserName')?.hasError('required') && formCap.get('UserName')?.touched">CEDULA ES REQUERIDA</span>
+                                     
+                                    <div class="input-group mb-4">
+                                        
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class='fas fa-address-card' style='font-size:24px'></i>
+                                        </span>
+                                        <input  formControlName="UserName" type="number" class="form-control" placeholder="Usuario" aria-label="UserName" autocapitalize="off" aria-describedby="basic-addon1" >
+                                      </div>
+                                    
+                                
+                                  </mat-card>  
+                                      <br>
+                            
+                                    <mat-card>
+                                        
+                                          <br>
+                                          <span>INGRESE POR FAVOR SU CONTRASEÑA</span>
+                                          <span class="text-danger ml-2" *ngIf="formCap.get('Password')?.hasError('required') && formCap.get('Password')?.touched">CONTRASEÑA ES REQUERIDA</span>
+                                     
+                                        <div class="input-group mb-4">
+                                          <span class="input-group-text" id="basic-addon1">
+                                              <i class='fas fa-barcode' style='font-size:24px'></i>
+                                          </span>
+                                          <input formControlName="Password" (click)="togglePassword" type="Password" class="form-control" placeholder="Password" aria-label="Password" autocapitalize="off" aria-describedby="basic-addon1">
+                                         
+                                        </div>
+                                      
+                                    </mat-card>
+
+                                       <br>
+                                       <div class="d-grid gap-2 col-6 mx-auto">
+                                      <button class="btn btn-warning" type="submit"><i class='fas fa-database' style='font-size:24px'></i>&nbsp; ACCEDER</button>
+                                  
+                                     </div>
+                                </mat-card-content>
+                              
+                         
+                      
+                    </form>
+              
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <img src="https://static.wixstatic.com/media/b5433a_dfdc32bae6dd41578c53747712aa901c~mv2.png/v1/fill/w_233,h_60,al_c,q_85,usm_0.66_1.00_0.01/b5433a_dfdc32bae6dd41578c53747712aa901c~mv2.webp" alt="" style="width:auto;height:auto;object-fit:cover;object-position:50% 50%">
+
+    </div>
+    </div>
+

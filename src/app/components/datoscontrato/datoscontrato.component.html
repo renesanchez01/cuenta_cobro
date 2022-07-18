@@ -1,0 +1,195 @@
+<br>
+
+<div class="example-card">
+<mat-card class="example-card">
+
+    
+   
+           
+        <div class="card card-stats">
+           
+            <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">work</i>
+                </div>
+                
+               
+                    <p class="card-category" align="left">OBJETO CONTRATO</p>
+              
+                <mat-panel-description align="left">
+                <h4 class="card-title">{{datosContrato.objeto_CONTRATO}}</h4>
+                <br>
+            </mat-panel-description>
+               
+        </div>
+        
+    </div>
+   
+    
+    <mat-card-content>
+    
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">work</i>
+                  </div>
+                  <p class="card-category">NUMERO CONTRATO</p>
+                  <h3 class="card-title">{{datosContrato.n_CONTRATO}}</h3>
+              </div>
+            
+          </div>
+      </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">date_range</i>
+                    </div>
+                    <p class="card-category">FECHA DE INICIO CONTRATO</p>
+                    <h3 class="card-title">{{datosContrato.fecha_INICIO_CONTRATO | date:'mediumDate'}}</h3>
+                </div>
+             
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">date_range</i>
+                  </div>
+                  <p class="card-category">FECHA FINAL CONTRATO</p>
+                  <h3 class="card-title">{{datosContrato.fecha_FINAL_CONTRATO | date:'mediumDate'}}</h3>
+              </div>
+            
+          </div>
+      </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">monetization_on</i>
+                    </div>
+                    <p class="card-category">VALOR TOTAL CONTRATO</p>
+                    <h3 class="card-title">{{datosContrato.valor_TOTAL_CONTRATO | currency:'$'}}</h3>
+                </div>
+             
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">attach_money</i>
+                  </div>
+                  <p class="card-category">VALOR MES CONTRATO</p>
+                  <h3 class="card-title">{{datosContrato.valor_CONTRATO | currency:'$'}}</h3>
+              </div>
+            
+          </div>
+      </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">filter_1</i>
+                    </div>
+                    <p class="card-category">TIPO CONTRATO</p>
+                    <h3 class="card-title">{{datosContrato.detalle}}</h3>
+                </div>
+             
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">receipt</i>
+                  </div>
+                  <p class="card-category">SIPSE</p>
+                  <h3 class="card-title">{{datosContrato.id_SIPSE}}</h3>
+              </div>
+            
+          </div>
+      </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">disc_full</i>
+                    </div>
+                    <p class="card-category">SUSPENSIONES</p>
+                    <h3 class="card-title">{{datosContrato.detalle_SUPENCION}}</h3>
+                </div>
+             
+            </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">plus_one</i>
+                  </div>
+                  <p class="card-category">ADICIONES</p>
+                  <h3 class="card-title">{{datosContrato.valor_ADICION | currency:'$'}}</h3>
+              </div>
+            
+          </div>
+      </div>
+      
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+           
+            <div class="card card-stats">
+               
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">event</i>
+                    </div>
+                    
+                   
+                        <p class="card-category">PRORROGA</p>
+                  
+                    <mat-panel-description>
+                    <h3 class="card-title">{{datosContrato.tiempo_MESES}} Meses con {{datosContrato.tiempo_DIAS}} dias</h3>
+                </mat-panel-description>
+                   
+            </div>
+            
+        </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">rate_review</i>
+                  </div>
+                  <p class="card-category">OBSERVACIONES</p>
+                  <h3 class="card-title">{{datosContrato.observaciones_CONTRATO}}</h3>
+              </div>
+            
+          </div>
+      </div>
+       
+      </div>
+
+    </mat-card-content>
+    <img align="right" width="50" src="https://cdn.pixabay.com/photo/2014/04/03/10/29/arrow-right-310628_960_720.png"/>
+    <br>
+     </mat-card>
+
+     
+   
+    </div>

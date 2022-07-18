@@ -1,0 +1,137 @@
+
+<div class="toolbar" role="banner">
+  
+</div>
+
+ <form [formGroup]="formCap" (ngSubmit)="salir()" *ngIf="!loading">
+  <button class="btn btn-warning" type="submit"><i class="material-icons"style="font-size:36px">settings_power</i></button>
+  
+</form>
+<br><br>
+  <div class="container mt-8">
+  
+  <div class="row">
+      <div class="col-lg-12 " >
+         
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+              <div class="card card-stats">
+                  <div class="card-header card-header-info card-header-icon">
+                      <br>
+                      <div align="center">
+                        <img width="269" alt="subalab Logo" src="https://static.wixstatic.com/media/b5433a_5dfe707767454914aec991d60a295e74~mv2.png/v1/crop/x_0,y_32,w_1738,h_442/fill/w_434,h_110,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo-subalab-1-.png"/>
+                        <br>
+                      <h2 class="card-title">GENERADOR CUENTA DE COBRO</h2><br>
+                    </div>
+                  </div>
+               
+              </div>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-8" align="center">
+              <div class="card card-stats">
+                  <div class="card-header card-header-info card-header-icon">
+                      
+                      <div align="center">
+                        <br>
+                      <h2 class="card-title">1).PARA CARGAR LOS DATOS ASOCIADOS A SU CONTRATO POR FAVOR DIGITE SU CEDULA EN EL SIGUIENTE BOTÓN <br>
+                        <button mat-raised-button color="accent" (click)="openDialog()">INGRESAR CEDULA</button></h2>
+                       <br>
+                      </div>
+                  </div>
+               
+              </div>
+          </div>
+        </div>
+   
+          <div class="card" *ngIf="pin.rol == 'Supervisor' || pin.rol == 'Contratista'" >
+           
+              <br>
+              <div align="center">
+               
+                  
+               
+             
+            <mat-card class="example-card" >  
+              <img width="50" src="https://cdn.pixabay.com/photo/2014/04/03/10/29/arrow-right-310628_960_720.png"/>
+              <br>                
+              <mat-tab-group mat-align-tabs="center" [color]=" 'warn' ">
+                <mat-tab label="1). INFORMACIÓN PERSONAL"><br><br>
+                  <mat-card-title>INFORMACIÓN PERSONAL</mat-card-title>
+                  <app-datosusuario [variableheredada]="pin" [datosContrato]="pin2" ></app-datosusuario></mat-tab>
+                <mat-tab label="2). INFORMACIÓN CONTRATO"><br><br>
+                  <mat-card-title>INFORMACIÓN CONTRATO</mat-card-title>
+                  <app-datoscontrato [datosContrato]="pin2"></app-datoscontrato></mat-tab>
+                <mat-tab label="3). GENERADOR CUENTA COBRO"><br><br>
+                  <mat-card-title>GENERADOR CUENTA COBRO</mat-card-title>
+                  <app-fromatocuentacobro [datosContrato]="pin2" [variableheredada]="pin" [totalsaldo]="valorapagar" [obligacioneslist2]="pin5" [Propuesta]="pin6"></app-fromatocuentacobro></mat-tab>
+              </mat-tab-group>
+
+              
+      </mat-card>
+
+      
+
+ 
+    </div>
+    </div>
+    <mat-card *ngIf="pin.rol == 'Supervisor' || pin.rol == 'Contratista'">
+
+      <p align="center">
+        Si encuentra alguna inconsistencia en la información visualizada, por favor enviar un correo a pagos.suba@gobiernobogota.gov.co con copia a contratacion.suba@gobiernobogota.gov.co  para su corrección. Recuerde por favor que su solicitud será atendida hasta el día 15 de cada mes.
+      </p>
+      <p align="center">
+        Si el aplicativo web presenta errores, por favor enviar un correo a sistemas.suba@gobiernobogota.gov.co
+      </p>
+      <p align="center">
+       
+     </p >
+    </mat-card>
+   
+    <div class="row" *ngIf="pin.rol == 'Supervisor'" >
+      <div class="col-lg-6 col-md-6 col-sm-6" >
+        <div class="card card-stats">
+            <div class="card-header  card-header-success card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">supervised_user_circle</i>
+                </div>
+                <p class="card-category">CONTRATISTAS A CARGO</p>
+                <mat-list role="list" >
+                
+              </mat-list>
+              
+            </div>
+            <div class="card-footer2">
+              <div class="stats">
+               
+                <h3 align="left" *ngFor="let item of pin3.nombres; let i = index" class="card-title">{{i+1}}). {{item}}</h3>
+              </div>
+            </div>
+        </div>
+    </div>
+      <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">account_balance_wallet</i>
+                  </div>
+                  <p class="card-category">CUENTAS POR APROBAR</p>
+                  <h3 class="card-title">PROXIMAMENTE EN FASE 3</h3>
+              </div>
+              <div class="card-footer2">
+                <div class="stats">
+                 
+                  
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    <br>
+    <br>
+    <div align="center">
+      <img src="https://static.wixstatic.com/media/b5433a_dfdc32bae6dd41578c53747712aa901c~mv2.png/v1/fill/w_233,h_60,al_c,q_85,usm_0.66_1.00_0.01/b5433a_dfdc32bae6dd41578c53747712aa901c~mv2.webp" style="width:auto;height:auto;object-fit:cover;">
+  </div>
+      </div>
+  </div>
+  </div>
+ 
